@@ -17,7 +17,7 @@ pipeline {
 
         stage('Push Image') {
             steps {
-                sh 'docker push indushreelokesh/taskflow:v1'
+                sh 'docker push indusonushivu/taskflow:v1'
             }
         }
 
