@@ -1,24 +1,23 @@
-shpipeline {
-
+pipeline {
     agent any
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Clone') {
             steps {
-                git 'https://github.com/indushreeelokesh/taskflow-devops-project.git'
+                git 'https://github.com/Indushreelokesh/Task-Manager-web-app.git'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t YOUR_DOCKERHUB/taskflow:v1 .'
+                sh 'docker build -t indushreelokesh/taskflow:v1 .'
             }
         }
 
-        stage('Push Docker Image') {
+        stage('Push Image') {
             steps {
-                sh 'docker push YOUR_DOCKERHUB/taskflow:v1'
+                sh 'docker push indushreelokesh/taskflow:v1'
             }
         }
 
@@ -26,7 +25,7 @@ shpipeline {
             steps {
                 sh 'docker stop taskflow-container || true'
                 sh 'docker rm taskflow-container || true'
-                sh 'docker run -d -p 3000:3000 --name taskflow-container YOUR_DOCKERHUB/taskflow:v1'
+                sh 'docker run -d -p 3000:3000 --name taskflow-container indushreelokesh/taskflow:v1'
             }
         }
 
