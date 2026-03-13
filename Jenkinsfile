@@ -15,12 +15,6 @@ pipeline {
             }
         }
 
-        stage('Push Image') {
-            steps {
-                sh 'docker push indusonushivu/taskflow:v1'
-            }
-        }
-
         stage('Run Container') {
             steps {
                 sh 'docker stop taskflow-container || true'
