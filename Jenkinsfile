@@ -5,7 +5,7 @@ pipeline {
 
         stage('Clone') {
             steps {
-                git 'https://github.com/Indushreelokesh/Task-Manager-web-app.git'
+                git branch: 'main', url: 'https://github.com/Indushreelokesh/Task-Manager-web-app.git'
             }
         }
 
@@ -28,7 +28,5 @@ pipeline {
                 sh 'docker run -d -p 3000:3000 --name taskflow-container indushreelokesh/taskflow:v1'
             }
         }
-
     }
 }
-
