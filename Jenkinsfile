@@ -17,8 +17,8 @@ pipeline {
 
         stage('Run Container') {
             steps {
-                sh 'docker stop taskflow-container || true'
-                sh 'docker rm taskflow-container || true'
+                sh 'docker stop $(docker ps -q) || true'
+                sh 'docker rm $(docker ps -aq) || true'
                 sh 'docker run -d -p 3000:3000 --name taskflow-container taskflow:v1'
             }
         }
