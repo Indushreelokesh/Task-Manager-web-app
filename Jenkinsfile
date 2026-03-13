@@ -1,51 +1,35 @@
 pipeline {
 
-agent any
+    agent any
 
-stages {
+    stages {
 
-stage('Clone') {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/YOUR_USERNAME/taskflow-devops-project.git'
+            }
+        }
 
-steps {
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t YOUR_DOCKERHUB/taskflow:v1 .'
+            }
+        }
 
-git 'https://github.com/indushreelokesh/taskflow-devops-project.git'
+        stage('Push Docker Image') {
+            steps {
+                sh 'docker push YOUR_DOCKERHUB/taskflow:v1'
+            }
+        }
 
+        stage('Run Container') {
+            steps {
+                sh 'docker stop taskflow-container || true'
+                sh 'docker rm taskflow-container || true'
+                sh 'docker run -d -p 3000:3000 --name taskflow-container YOUR_DOCKERHUB/taskflow:v1'
+            }
+        }
+
+    }
 }
 
-}
-
-stage('Build Docker Image') {
-
-steps {
-
-sh 'docker build -t YOUR_DOCKERHUB/taskflow:v1 .'
-
-}
-
-}
-
-stage('Push Image') {
-
-steps {
-
-sh 'docker push YOUR_DOCKERHUB/taskflow:v1'
-
-}
-
-}
-
-stage('Deploy to Kubernetes') {
-
-steps {
-
-sh 'kubectl apply -f deployment.yaml'
-
-sh 'kubectl apply -f service.yaml'
-
-}
-
-}
-
-}
-
-}
