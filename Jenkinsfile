@@ -11,7 +11,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t indusonushivu/taskflow:v1 .'
+                sh 'docker build -t taskflow:v1 .'
             }
         }
 
@@ -19,8 +19,9 @@ pipeline {
             steps {
                 sh 'docker stop taskflow-container || true'
                 sh 'docker rm taskflow-container || true'
-                sh 'docker run -d -p 3000:3000 --name taskflow-container indusonushivu/taskflow:v1'
+                sh 'docker run -d -p 3000:3000 --name taskflow-container taskflow:v1'
             }
         }
+
     }
 }
