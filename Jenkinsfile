@@ -1,4 +1,4 @@
-pipeline {
+shpipeline {
 
     agent any
 
@@ -6,7 +6,7 @@ pipeline {
 
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/YOUR_USERNAME/taskflow-devops-project.git'
+                git 'https://github.com/indushreeelokesh/taskflow-devops-project.git'
             }
         }
 
